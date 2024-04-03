@@ -13,8 +13,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 
-np.array(1,10,2).reshape(2, 3)
-
 #標準版寫法
 #載入資料
 dataset = pd.read_csv("HealthCheck.csv")

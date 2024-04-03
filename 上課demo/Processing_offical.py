@@ -12,6 +12,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
 
 
 dataset = pd.read_csv("CarEvaluation.csv") #dataframe, 有欄位名稱
@@ -43,9 +44,21 @@ X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,random_state=
 
 
 #特徵縮放
-sc_X = StandardScaler().fit(X_train)
+#sc_X = StandardScaler().fit(X_train)
+
 #StandardScaler物件產生 縮放計算 模型
-X_train = sc_X.transform(X_train)
+#X_train = sc_X.transform(X_train)
+
 #縮放後的值, 替換X_train內的值
-X_test = sc_X.transform(X_test)
+#X_test = sc_X.transform(X_test)
+
+
+#簡單線性回歸
+regressor = LinearRegression()
+regressor.fit(X_train,Y_train) 
+
+Y_pred = regressor.predict(X_test) #模型預測答案
+
+
+
 
