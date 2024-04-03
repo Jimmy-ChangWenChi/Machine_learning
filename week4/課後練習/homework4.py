@@ -23,6 +23,7 @@ user_weight = eval(input("請輸入您的體重(kg) : "))
 dataset_Height = pp.dataset("Student_Height.csv")
 dataset_Weight = pp.dataset("Student_Weight.csv")
 
+
 X, Y = pp.decomposition(dataset_Height, [1], [3])
 X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
 
@@ -30,11 +31,13 @@ X_train, X_test = pp.feature_scaling(fit_ary=X_train, transform_arys=(X_train, X
 Y_train, Y_test = pp.feature_scaling(fit_ary=Y_train, transform_arys=(Y_train, Y_test))
 
 from HappyML.regression import SimpleRegressor
-# regressor =[[SimpleRegressor(),SimpleRegressor()],[SimpleRegressor(),SimpleRegressor()]]
-# Y_pred = regressor[0][user_Gender].predict(pd.DataFrame([[user_Gender]])).iloc[0,0]
+regressor =[[SimpleRegressor(),SimpleRegressor()],[SimpleRegressor(),SimpleRegressor()]]
+h_avg = regressor[0][user_Gender].predict(X_test=pd.DataFrame([[user_Gender]])).iloc[0,0]
+#Y_pred = regressor[0][user_Gender].predict(dataset_Height([[user_Gender]])).iloc[0,0]
+Y_pred = regressor.fit(X_train,Y_train).predict(h_avg)
 
-regressor = SimpleRegressor()
-Y_pred = regressor.fit(X_train, Y_train).predict(X_test)
+# regressor = SimpleRegressor()
+# Y_pred = regressor.fit(X_train, Y_train).predict(X_test)
 
 
 print(regressor.r_score(X_test, Y_test))
