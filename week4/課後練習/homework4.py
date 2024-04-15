@@ -24,74 +24,55 @@ dataset_Height = pp.dataset("Student_Height.csv")
 dataset_Weight = pp.dataset("Student_Weight.csv")
 
 
-X, Y = pp.decomposition(dataset_Height, [1], [3])
-X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
+# X, Y = pp.decomposition(dataset_Height, [1], [2])
+# X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
 
-X_train, X_test = pp.feature_scaling(fit_ary=X_train, transform_arys=(X_train, X_test)) #套用 X_train跟 X_test
-Y_train, Y_test = pp.feature_scaling(fit_ary=Y_train, transform_arys=(Y_train, Y_test))
+All_Age, All_Height = pp.decomposition(dataset_Height,[1],[2])
+Man_Height,Woman_Height = pp.decomposition(dataset_Height, [3],[4])
+
+All_Age, All_Weight = pp.decomposition(dataset_Weight,[1],[2])
+Man_Weight,Woman_Weight = pp.decomposition(dataset_Weight, [3],[4])
+
+if user_Gender == 0:
+    All_Age_train, All_Age_test, Man_Height_train, Man_Height_test = pp.split_train_test(All_Age, Man_Height, train_size=0.8)
+    All_Age_train, All_Age_test, Man_Weight_train, Man_Weight_test = pp.split_train_test(All_Age, Man_Weight, train_size=0.8)
+else:
+    All_Age_train, All_Age_test, Woman_Height_train, Woman_Height_test = pp.split_train_test(All_Age, Woman_Height, train_size=0.8)
+    All_Age_train, All_Age_test, Woman_Weight_train, Woman_Weight_test = pp.split_train_test(All_Age, Woman_Weight, train_size=0.8)
+
+
+
 
 from HappyML.regression import SimpleRegressor
-regressor =[[SimpleRegressor(),SimpleRegressor()],[SimpleRegressor(),SimpleRegressor()]]
-h_avg = regressor[0][user_Gender].predict(X_test=pd.DataFrame([[user_Gender]])).iloc[0,0]
-#Y_pred = regressor[0][user_Gender].predict(dataset_Height([[user_Gender]])).iloc[0,0]
-Y_pred = regressor.fit(X_train,Y_train).predict(h_avg)
-
-# regressor = SimpleRegressor()
-# Y_pred = regressor.fit(X_train, Y_train).predict(X_test)
 
 
-print(regressor.r_score(X_test, Y_test))
+regressor = SimpleRegressor()
+
+#身高
+if user_Gender == 0:
+    Y_pred_Height = regressor.fit(All_Age_train, Man_Height_train).predict(All_Age_test)
+    # 預測結果分數
+    print("R-Squared Score:", regressor.r_score(All_Age_test, Man_Height_test))
+
+    #體重
+    Y_pred_Weight = regressor.fit(All_Age_train, Man_Weight_train).predict(All_Age_test)
+    print("R-Squared Score:", regressor.r_score(All_Age_test, Man_Weight_test))
+
+else:
+    Y_pred_Height = regressor.fit(All_Age_train, Woman_Height_train).predict(All_Age_test)
+    # 預測結果分數
+    print("R-Squared Score:", regressor.r_score(All_Age_test, Woman_Height_test))
+
+    #體重
+    Y_pred_Weight = regressor.fit(All_Age_train, Woman_Weight_train).predict(All_Age_test)
+    print("R-Squared Score:", regressor.r_score(All_Age_test, Woman_Weight_test))
+
+
 
 from HappyML import model_drawer as md
-sample_data = (user_age,user_height) #樣本點
+md.sample_model(sample_data=(user_age, user_height), model_data=(All_Age_test, Y_pred_Height),
+                title="身高落點模型", font="DFKai-sb") #測試結果
 
-model_data = (X_train,regressor.predict(X_train)) #模型
-md.sample_model(sample_data=sample_data, model_data=model_data, title="男生身高訓練集樣本點 VS 模型", font="DFKai-sb")
-
-
-
-
-# X_AGE, Y_MALE_Height = pp.decomposition(dataset_Height, [1], [3])
-# X_AGE, Y_FEMALE_Height = pp.decomposition(dataset_Height, [1], [4])
-# X_AGE, Y_MALE_Weight = pp.decomposition(dataset_Weight, [1], [3])
-# X_AGE, Y_FEMALE_Weight = pp.decomposition(dataset_Weight, [1], [4])
-
-# =============================================================================
-#X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
-# X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
-# X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
-# X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
-# =============================================================================
-
-# #特徵縮放
-# X_train, X_test = pp.feature_scaling(fit_ary=X_train, transform_arys=(X_train, X_test)) #套用 X_train跟 X_test
-# Y_train, Y_test = pp.feature_scaling(fit_ary=Y_train, transform_arys=(Y_train, Y_test))
-
-
-# from HappyML.regression import SimpleRegressor
-# #regressor = SimpleRegressor()
-# regressor =[[SimpleRegressor(),SimpleRegressor()],[SimpleRegressor(),SimpleRegressor()]]
-
-# #Y_pred = regressor.fit(X_train,Y_train).predict(X_test)
-# Y_pred = regressor[HEIGHT][user_Gender].predict(pd.DataFrame([[user_Gender]])) #第一組[] 是控制身高體重, 第二組[]是控制男生女生
-
-# print(regressor.r_score(X_test, Y_test))
-
-# from HappyML import model_drawer as md
-# sample_data=(X_train,Y_train) #樣本點
-# model_data = (X_train,regressor.predict(X_train)) #模型
-
-# md.sample_model(sample_data=sample_data, model_data=model_data, title="訓練集樣本點 VS 模型", font="DFKai-sb") #訓練結果
-
-
-
-# =============================================================================
-# HEIGHT = 0,WEIGHT = 1,MALE = 0, FEMALE = 1
-# 
-# pd.DataFrame([[user_age]])
-# 
-# 
-# regressor[HEIGHT][user_gender].predict(pd.DataFrame([[user_age]])).iloc[0,0]
-# =============================================================================
-
+md.sample_model(sample_data=(user_age, user_weight), model_data=(All_Age_test, Y_pred_Weight),
+                title="體重落點模型", font="DFKai-sb") #測試結果
 
