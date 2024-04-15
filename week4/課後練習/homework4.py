@@ -41,6 +41,8 @@ else:
     All_Age_train, All_Age_test, Woman_Weight_train, Woman_Weight_test = pp.split_train_test(All_Age, Woman_Weight, train_size=0.8)
 
 
+print("Man_Height_train: ", Man_Height_train)
+print("Man_Weight_train: ", Man_Weight_train)
 
 
 from HappyML.regression import SimpleRegressor
@@ -48,22 +50,22 @@ from HappyML.regression import SimpleRegressor
 
 regressor = SimpleRegressor()
 
-#身高
+
 if user_Gender == 0:
+    
+    #身高
     Y_pred_Height = regressor.fit(All_Age_train, Man_Height_train).predict(All_Age_test)
+    #print("平均身高: ", Y_pred_Height)
     # 預測結果分數
     print("R-Squared Score:", regressor.r_score(All_Age_test, Man_Height_test))
 
     #體重
     Y_pred_Weight = regressor.fit(All_Age_train, Man_Weight_train).predict(All_Age_test)
-    print("R-Squared Score:", regressor.r_score(All_Age_test, Man_Weight_test))
+    #print("R-Squared Score:", regressor.r_score(All_Age_test, Man_Weight_test))
 
 else:
     Y_pred_Height = regressor.fit(All_Age_train, Woman_Height_train).predict(All_Age_test)
-    # 預測結果分數
     print("R-Squared Score:", regressor.r_score(All_Age_test, Woman_Height_test))
-
-    #體重
     Y_pred_Weight = regressor.fit(All_Age_train, Woman_Weight_train).predict(All_Age_test)
     print("R-Squared Score:", regressor.r_score(All_Age_test, Woman_Weight_test))
 
