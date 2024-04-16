@@ -60,10 +60,20 @@ print("Goodness of Model (R-Squared Score):", simple_reg.r_score(X_test, Y_test)
 # print(model.params)
 
 # In[] Multiple Linear Regression with HappyML
+# from HappyML.regression import MultipleRegressor
+
+# model = MultipleRegressor()
+# #selected_features = model.backward_elimination(X_train, Y_train, verbose=True)
+# model.backward_elimination(X_train, Y_train)
+# Y_pred = model.fit(X_train, Y_train).predict(X_test)
+
+# print("Adjusted R-Squared:", model.r_score())
+
+# In[]
 from HappyML.regression import MultipleRegressor
 
 model = MultipleRegressor()
-#selected_features = model.backward_elimination(X_train, Y_train, verbose=True)
+#verbose=false 就不會把每一次挑選結果顯示
 model.backward_elimination(X_train, Y_train, verbose=True)
 Y_pred = model.fit(X_train, Y_train).predict(X_test)
 
