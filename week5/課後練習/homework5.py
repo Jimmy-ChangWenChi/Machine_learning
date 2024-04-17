@@ -1,26 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jan 25 23:37:26 2023
+Created on Wed Apr 17 14:42:03 2024
 
-@author: Jimmy
+@author: jimmy
 """
 
 # In[] Pre-processing
 import HappyML.preprocessor as pp
 
 # Dataset Loading
-dataset = pp.dataset("50_Startups.csv")
+dataset = pp.dataset("Insurance.csv")
 
 # Independent/Dependent Variables Decomposition
-X, Y = pp.decomposition(dataset, [0, 1, 2, 3], [4])
+X, Y = pp.decomposition(dataset, [0, 1, 2, 3, 4, 5], [6])
 
 # Apply One Hot Encoder to Column[3] & Remove Dummy Variable Trap
-X = pp.onehot_encoder(X, columns=[3], remove_trap=True)
+X = pp.onehot_encoder(X, columns=[1], remove_trap=True)
 # X = pp.remove_columns(X, [3])
-
-# Add Constants (for Standard Library only)
-# import statsmodels.api as sm
-# X = sm.add_constant(X)
 
 # Split Training vs. Testing Set
 X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
@@ -30,34 +26,13 @@ X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
 # Y_train, Y_test = pp.feature_scaling(fit_ary=Y_train, transform_arys=(Y_train, Y_test))
 
 # In[] Create Linear Regressor 簡單線性回歸
-from HappyML.regression import SimpleRegressor
+# from HappyML.regression import SimpleRegressor
 
-simple_reg = SimpleRegressor()
-Y_pred_simple = simple_reg.fit(X_train, Y_train).predict(X_test)
+# simple_reg = SimpleRegressor()
+# Y_pred_simple = simple_reg.fit(X_train, Y_train).predict(X_test)
 
-# R-Squared Score
-print("Goodness of Model (R-Squared Score):", simple_reg.r_score(X_test, Y_test))
-
-# In[] Multiple Linear Regression
-
-# # Training 降維
-#features = [0, 1,2,3, 4,5]
-# features = [0, 1,3]
-# model = sm.OLS(exog=X_train.iloc[:, features].astype("float"), endog=Y_train.astype("float")).fit()
-
-# # Get Model Summary Report
-# print(model.summary())
-
-# # Performance
-# print("Adjusted R-Squared: ", model.rsquared_adj)
-
-# # In[] Predict
-# Y_pred = model.predict(X_test.iloc[:, features].astype("float"))
-# # Y_Pred = model.predict(X_test)
-
-# # # Parameters of Model
-# print("Regression Coefficients:", model.params.to_numpy())
-# print(model.params)
+# # R-Squared Score
+# print("Goodness of Model (R-Squared Score):", simple_reg.r_score(X_test, Y_test))
 
 # In[] Multiple Linear Regression with HappyML 多元線性回歸
 from HappyML.regression import MultipleRegressor
