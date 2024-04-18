@@ -26,8 +26,8 @@ X = pp.onehot_encoder(X, columns=[3], remove_trap=True)
 X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y, train_size=0.8)
 
 # Feature Scaling (optional)
-# X_train, X_test = pp.feature_scaling(fit_ary=X_train, transform_arys=(X_train, X_test))
-# Y_train, Y_test = pp.feature_scaling(fit_ary=Y_train, transform_arys=(Y_train, Y_test))
+X_train, X_test = pp.feature_scaling(fit_ary=X_train, transform_arys=(X_train, X_test))
+Y_train, Y_test = pp.feature_scaling(fit_ary=Y_train, transform_arys=(Y_train, Y_test))
 
 # In[] Create Linear Regressor 簡單線性回歸
 from HappyML.regression import SimpleRegressor
@@ -82,12 +82,12 @@ else:
     print(f"RMSE Linear: {rmse_linear:.4f} > RMSE Multi: {rmse_multi:.4f}. Multi smaller, WIN!!")
 
 # In[] Check for Assumption of Regression
-# from HappyML.criteria import AssumptionChecker
+from HappyML.criteria import AssumptionChecker
 
-# X_train, X_test = pp.feature_scaling(fit_ary=X_train, transform_arys=(X_train, X_test))
-# Y_train, Y_test, Y_pred = pp.feature_scaling(fit_ary=Y_train, transform_arys=(Y_train, Y_test, Y_pred))
+X_train, X_test = pp.feature_scaling(fit_ary=X_train, transform_arys=(X_train, X_test))
+Y_train, Y_test, Y_pred = pp.feature_scaling(fit_ary=Y_train, transform_arys=(Y_train, Y_test, Y_pred))
 
-# checker = AssumptionChecker(X_train.loc[:, model.named_features], X_test.loc[:, model.named_features], Y_train, Y_test, Y_pred)
-# checker.y_lim = (-4, 4)
-# checker.heatmap = True
-# checker.check_all()
+checker = AssumptionChecker(X_train.loc[:, model.named_features], X_test.loc[:, model.named_features], Y_train, Y_test, Y_pred)
+checker.y_lim = (-4, 4)
+checker.heatmap = True
+checker.check_all()
