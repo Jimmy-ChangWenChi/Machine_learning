@@ -85,7 +85,6 @@ print(f"F1-score: {pfm.f_score():.2%}")
 # In[] Visualize the Result
 import HappyML.model_drawer as md
 
-md.classify_result(x=X_train, y=Y_train, classifier=model.regressor, 
+md.classify_result(x=X_train, y=Y_train, classifier=model.regressor,
                    title="訓練集樣本點 vs. 模型", font="DFKai-sb")
-md.classify_result(x=X_test, y=Y_test, classifier=model.regressor, 
-                   title="測試集樣本點 vs. 模型", font="DFKai-sb")
+md.classify_result(x=X_test, y=Y_test, classifier=model.regressor, title="測試集樣本點 vs. 模型", font="DFKai-sb")
