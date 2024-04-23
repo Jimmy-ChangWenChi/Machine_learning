@@ -37,6 +37,8 @@ input_year = eval(input("目前使用年份: "))
 #[[input_year]] #轉成二維陣列
 pd_year = pd.DataFrame([[input_year]]) #轉成1乘1
 
-print(f"你的設備預測總失效時間 = ", "{:.4f}".format(model.predict(pd_year).iloc[0,0]),"小時" )
+
+print(f"你的設備預測總失效時間 = {model.predict(pd_year).iloc[0,0]} 小時")
 #print(f"你的設備預測總失效時間 = ", "{:.4f}".format(model.fit(X,Y).predict(pd_year).iloc[0,0]),"小時" )
+
 print(f"平均每年失效時間 = ", "{:.4f}".format(model.predict(pd_year).iloc[0,0]/input_year),"小時/年" )
