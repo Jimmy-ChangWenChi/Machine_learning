@@ -77,3 +77,9 @@ import HappyML.model_drawer as md
 
 md.classify_result(x=X_train, y=Y_train, classifier=model.classifier, title="訓練集 vs. 模型", font='DFKai-sb')
 md.classify_result(x=X_test, y=Y_test, classifier=model.classifier, title="測試集 vs. 模型", font='DFKai-sb')
+
+
+from HappyML.criteria import AssumptionChecker
+checker = AssumptionChecker(x_train, x_test, y_train, y_test, y_pred)
+checker.features_correlation(heatmap=True)
+
