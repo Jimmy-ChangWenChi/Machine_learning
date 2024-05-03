@@ -13,7 +13,7 @@ dataset = load_iris()
 
 # X, Y
 import pandas as pd
-X = pd.DataFrame(dataset.data, columns=dataset.feature_names)
+X = pd.DataFrame(dataset.data, columns=dataset.feature_names) #載入 NDArray並包覆成 DataFrame
 Y = pd.DataFrame(dataset.target, columns=["Iris_Type"])
 Y_name = dataset.target_names.tolist()
 
@@ -23,6 +23,7 @@ import HappyML.preprocessor as pp
 
 # Feature Selection
 selector = KBestSelector(best_k=2)
+#selector = KBestSelector(best_k='auto')
 X = selector.fit(x_ary=X, y_ary=Y, verbose=True, sort=True).transform(x_ary=X)
 
 # Split Training / TEsting Set
