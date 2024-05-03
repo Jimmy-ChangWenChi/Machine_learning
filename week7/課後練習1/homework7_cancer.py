@@ -57,8 +57,8 @@ X_train, X_test = pp.feature_scaling(fit_ary=X_train, transform_arys=(X_train, X
 model_2 = LogisticRegressor()
 Y_pred = model_2.fit(X_train, Y_train).predict(X_test)
 
-# import HappyML.model_drawer as md
-# md.classify_result(x=X_train, y=Y_train, classifier=model_2.regressor,
-#                     title="訓練集樣本點 vs. 模型", font="DFKai-sb")
-# md.classify_result(x=X_test, y=Y_test, classifier=model_2.regressor, title="測試集樣本點 vs. 模型", font="DFKai-sb")
+import HappyML.model_drawer as md
+md.classify_result(x=X_train, y=Y_train, classifier=model_2.regressor,
+                    title="訓練集樣本點 vs. 模型", font="DFKai-sb")
+md.classify_result(x=X_test, y=Y_test, classifier=model_2.regressor, title="測試集樣本點 vs. 模型", font="DFKai-sb")
 

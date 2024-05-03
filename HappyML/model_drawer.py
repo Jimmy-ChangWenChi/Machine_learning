@@ -44,7 +44,7 @@ def sample_model(sample_data=None, sample_color="red", model_data=None, model_co
 # NOTE1: Make sure you've done "Feature Scaling" before calling this function.  Otherwise the background dots will be too many to out-of-memory.
 # NOTE2: This function can only take 2 features to draw.  Make sure you selected "Best 2" features to train the classifier.
 
-def classify_result(x, y, classifier, fg_color=("O", "B"), bg_color=("R", "G"), title="", font=""):
+def classify_result(x, y, classifier, fg_color=("O", "B"), bg_color=("r", "g"), title="", font=""):
     # Get the xlabel & ylabel first
     xlabel = x.columns[0]
     ylabel = x.columns[1]
