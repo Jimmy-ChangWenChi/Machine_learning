@@ -73,18 +73,20 @@ md.classify_result(x=X_test, y=Y_test, classifier=clr_bayes.classifier, fg_color
 
 # In[] SVM with HappyML & Gridsearch
 
-# Parameters --------------------
+# 準備Parameters --------------------
 import numpy as np
 
 # Ranges of Hyper Parameters
 C_range = np.logspace(3, 6, 4) # Create [1000, 10000, 100000, 1000000]
 Gamma_range = np.logspace(-4, -1, 4) # Create [0.0001, 0.001, 0.01, 0.1]
 Coef0_range = np.logspace(0, 3, 4) # Create [1, 10, 100, 1000]
+#Poly_range = np.logspace(start, stop,4) # Create []
 
 # Combination of Hyper Parameters
 Linear_dict = dict(kernel=["linear"], C=C_range, coef0=Coef0_range)
 RBF_dict = dict(kernel=["rbf"], C=C_range, gamma=Gamma_range)
 Sigmoid_dict = dict(kernel=["sigmoid"], C=C_range, gamma=Gamma_range, coef0=Coef0_range)
+#Poly_dict = dict(kernel=["poly"],C=C_range,gamma=Gamma_range,coef0=Coef0_range)
 
 # Collect all Combinations for Grid Search
 params_list = [Linear_dict, RBF_dict, Sigmoid_dict]
