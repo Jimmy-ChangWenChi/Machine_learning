@@ -80,6 +80,6 @@ md.classify_result(x=X_test, y=Y_test, classifier=model.classifier, title="æ¸¬è©
 
 
 from HappyML.criteria import AssumptionChecker
-checker = AssumptionChecker(x_train, x_test, y_train, y_test, y_pred)
+checker = AssumptionChecker(X_train, X_test, Y_train, Y_test, Y_pred)
 checker.features_correlation(heatmap=True)
 

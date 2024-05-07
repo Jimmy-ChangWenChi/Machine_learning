@@ -53,7 +53,7 @@ X_train, X_test = pp.feature_scaling(fit_ary=X_train, transform_arys=(X_train, X
 
 
 model_2 = NaiveBayesClassifier()
-Y_pred = model.fit(X_train, Y_train).predict(X_test)
+Y_pred = model_2.fit(X_train, Y_train).predict(X_test)
 K = 10
 kfp = KFoldClassificationPerformance(x_ary=X, y_ary=Y, classifier=model.classifier, k_fold=K, verbose=False)
 
@@ -65,8 +65,8 @@ print(f"{K} Folds Mean F1-Score: {kfp.f_score():.2%}")
 
 import HappyML.model_drawer as md
 
-# md.classify_result(x=X_train, y=Y_train, classifier=model_2.classifier, title="訓練集 vs. 模型", font='DFKai-sb')
-# md.classify_result(x=X_test, y=Y_test, classifier=model_2.classifier, title="測試集 vs. 模型", font='DFKai-sb')
+md.classify_result(x=X_train, y=Y_train, classifier=model_2.classifier, title="訓練集 vs. 模型", font='DFKai-sb')
+md.classify_result(x=X_test, y=Y_test, classifier=model_2.classifier, title="測試集 vs. 模型", font='DFKai-sb')
 
 
 #設定 K = 2 的邏輯回歸
@@ -89,5 +89,5 @@ print(f"Recall: {pfm.recall():.2%}")
 print(f"Precision: {pfm.precision():.2%}")
 print(f"F1-score: {pfm.f_score():.2%}")
 
-# md.classify_result(x=X_train, y=Y_train, classifier=model_2.classifier, title="訓練集 vs. 模型", font='DFKai-sb')
-# md.classify_result(x=X_test, y=Y_test, classifier=model_2.classifier, title="測試集 vs. 模型", font='DFKai-sb')
+md.classify_result(x=X_train, y=Y_train, classifier=model_2.classifier, title="訓練集 vs. 模型", font='DFKai-sb')
+md.classify_result(x=X_test, y=Y_test, classifier=model_2.classifier, title="測試集 vs. 模型", font='DFKai-sb')

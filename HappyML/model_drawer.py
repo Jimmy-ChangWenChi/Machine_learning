@@ -44,10 +44,28 @@ def sample_model(sample_data=None, sample_color="red", model_data=None, model_co
 # NOTE1: Make sure you've done "Feature Scaling" before calling this function.  Otherwise the background dots will be too many to out-of-memory.
 # NOTE2: This function can only take 2 features to draw.  Make sure you selected "Best 2" features to train the classifier.
 
-def classify_result(x, y, classifier, fg_color=("O", "B"), bg_color=("r", "g"), title="", font=""):
+def classify_result(x, y, classifier, fg_color=("orange", "blue"), bg_color=("red", "green"), title="", font=""):
     # Get the xlabel & ylabel first
     xlabel = x.columns[0]
     ylabel = x.columns[1]
+
+    # Convert the color strings into hex codes
+    # This is for compatibility with ListedColormap when matplotlib >= 3.8.0
+    color_hex_codes = {
+        'red': '#FF0000',
+        'green': '#008000',
+        'blue': '#0000FF',
+        'yellow': '#FFFF00',
+        'cyan': '#00FFFF',
+        'magenta': '#FF00FF',
+        'black': '#000000',
+        'white': '#FFFFFF',
+        'orange': '#FFA500',
+        'purple': '#800080'
+    }
+
+    fg_color = [color_hex_codes[color] for color in fg_color]
+    bg_color = [color_hex_codes[color] for color in bg_color]
 
     # Prepare each dot of background
     x = x.values
