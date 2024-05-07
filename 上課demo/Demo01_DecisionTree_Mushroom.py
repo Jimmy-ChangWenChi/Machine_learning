@@ -36,11 +36,15 @@ X_train, X_test, Y_train, Y_test = pp.split_train_test(x_ary=X, y_ary=Y)
 # classifier.fit(X_train, Y_train)
 # Y_pred = classifier.predict(X_test)
 
+
 # With HappyML's Class
 from HappyML.classification import DecisionTree
 
 classifier = DecisionTree()
 Y_pred = classifier.fit(X_train, Y_train).predict(X_test)
+
+
+
 
 # In[] Performance
 from HappyML.performance import KFoldClassificationPerformance
@@ -56,18 +60,18 @@ print("{} Folds Mean F1-Score: {}".format(K, kfp.f_score()))
 
 # In[] Visualization
 
-GRAPHVIZ_INSTALL = "C:/Program Files (x86)/Graphviz/bin"
+#GRAPHVIZ_INSTALL = "C:/Program Files (x86)/Graphviz/bin"
 
-# from sklearn import tree
-# import pydotplus
-# from IPython.display import Image, display
-# import os
+from sklearn import tree
+import pydotplus
+from IPython.display import Image, display
+#import os
 
-# os.environ["PATH"] += os.pathsep + GRAPHVIZ_INSTALL
-# cls_name = [Y_mapping[key] for key in sorted(Y_mapping.keys())]
-# dot_data = tree.export_graphviz(classifier.classifier, filled=True, feature_names=X_test.columns, class_names=cls_name, rounded=True, special_characters=True)
-# graph = pydotplus.graph_from_dot_data(dot_data)
-# display(Image(graph.create_png()))
+#os.environ["PATH"] += os.pathsep + GRAPHVIZ_INSTALL
+cls_name = [Y_mapping[key] for key in sorted(Y_mapping.keys())]
+dot_data = tree.export_graphviz(classifier.classifier, filled=True, feature_names=X_test.columns, class_names=cls_name, rounded=True, special_characters=True)
+graph = pydotplus.graph_from_dot_data(dot_data)
+display(Image(graph.create_png()))
 
 import HappyML.model_drawer as md
 from IPython.display import Image, display
