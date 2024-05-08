@@ -7,7 +7,6 @@ Created on Fri May  3 15:22:30 2024
 
 import HappyML.preprocessor as pp
 from HappyML.preprocessor import KBestSelector
-import HappyML.preprocessor as pp
 from HappyML.classification import SVM
 from HappyML.performance import KFoldClassificationPerformance
 
