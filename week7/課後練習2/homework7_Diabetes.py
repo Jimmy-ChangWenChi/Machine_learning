@@ -32,9 +32,9 @@ kfp = KFoldClassificationPerformance(x_ary=X, y_ary=Y, classifier=model.classifi
 
 #print("{} Folds Mean Accuracy: {}".format(K, kfp.accuracy()))
 print(f"{K} Folds Mean Accuracy: {kfp.accuracy():.2%}")
-print("{} Folds Mean Recall: {}".format(K, kfp.recall()))
-print("{} Folds Mean Precision: {}".format(K, kfp.precision()))
-print("{} Folds Mean F1-Score: {}".format(K, kfp.f_score()))
+print("{} Folds Mean Recall: {:.2%}".format(K, kfp.recall()))
+print("{} Folds Mean Precision: {:.2%}".format(K, kfp.precision()))
+print("{} Folds Mean F1-Score: {:.2%}".format(K, kfp.f_score()))
 
 
 #檢查 自變數各自獨立
@@ -91,3 +91,13 @@ print(f"F1-score: {pfm.f_score():.2%}")
 
 md.classify_result(x=X_train, y=Y_train, classifier=model_2.classifier, title="訓練集 vs. 模型", font='DFKai-sb')
 md.classify_result(x=X_test, y=Y_test, classifier=model_2.classifier, title="測試集 vs. 模型", font='DFKai-sb')
+
+
+# =============================================================================
+# 這個題目單純貝式的效能結果比邏輯回歸的效能更好,
+# 因此覺得單純貝式的模型好,
+# 兩個模型的卡方降為都設定為2,
+# 但是單純貝式還有進行K次交叉驗證,
+# 會讓數據抓取更為平均
+# =============================================================================
+

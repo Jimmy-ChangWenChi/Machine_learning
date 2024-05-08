@@ -77,5 +77,7 @@ import HappyML.model_drawer as md
 from IPython.display import Image, display
 
 cls_name = [Y_mapping[key] for key in sorted(Y_mapping.keys())]
-graph = md.tree_drawer(classifier=classifier.classifier, feature_names=X_test.columns, target_names=cls_name, graphviz_bin=GRAPHVIZ_INSTALL)
+#graph = md.tree_drawer(classifier=classifier.classifier, feature_names=X_test.columns, target_names=cls_name, graphviz_bin=GRAPHVIZ_INSTALL)
+graph = md.tree_drawer(classifier=classifier.classifier, feature_names=X_test.columns, target_names=cls_name)
+
 display(Image(graph.create_png()))
