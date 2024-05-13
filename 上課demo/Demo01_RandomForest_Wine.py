@@ -113,9 +113,9 @@ print("{} Folds Mean F1-Score: {}".format(K, kfp.f_score()))
 import HappyML.model_drawer as md
 from IPython.display import Image, display
 
-for i in range(10):
-    clfr = classifier.classifier.estimators_[i]
-#graph = md.tree_drawer(classifier=clfr, feature_names=X_test.columns, target_names="123", graphviz_bin=GRAPHVIZ_INSTALL)
+#for i in range(10):
+    clfr = classifier.classifier.estimators_[1]
+    #graph = md.tree_drawer(classifier=clfr, feature_names=X_test.columns, target_names="123", graphviz_bin=GRAPHVIZ_INSTALL)
     #graph = md.tree_drawer(classifier=clfr, feature_names=X_test.columns, target_names="123")
     graph = md.tree_drawer(classifier=clfr, feature_names=X_test.columns, target_names=["1","2","3"])
 
