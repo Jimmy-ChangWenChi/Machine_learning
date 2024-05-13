@@ -12,36 +12,33 @@ from HappyML.performance import KFoldClassificationPerformance
 
 dataset = pp.dataset(file="Voice.csv")
 
-# X, Y = pp.decomposition(dataset, x_columns=[i for i in range(0, 19)], y_columns=[20])
+X, Y = pp.decomposition(dataset, x_columns=[i for i in range(0, 19)], y_columns=[20])
 
-# Y, Y_mapping = pp.label_encoder(Y,mapping=True)
+Y, Y_mapping = pp.label_encoder(Y,mapping=True)
 
-# from HappyML.preprocessor import KBestSelector
-# import HappyML.preprocessor as pp
+import HappyML.preprocessor as pp
 
-# selector = KBestSelector(best_k = 'auto')
+selector = KBestSelector(best_k = 'auto')
 
-# X = selector.fit(x_ary = X, y_ary = Y, verbose = True, sort=True).transform(x_ary=X)
+X = selector.fit(x_ary = X, y_ary = Y, verbose = True, sort=True).transform(x_ary=X)
 
-# X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y)
-
-
-# from HappyML.classification import SVM
-
-# classifier = SVM()
-# Y_pre_svm = classifier.fit(X_train,Y_train).predict(X_test)
+X_train, X_test, Y_train, Y_test = pp.split_train_test(X, Y)
 
 
-# from HappyML.performance import KFoldClassificationPerformance
 
-# K = 10
-# kfp = KFoldClassificationPerformance(x_ary= X, y_ary=Y, classifier= classifier.classifier, k_fold=  K)
+classifier = SVM()
+Y_pre_svm = classifier.fit(X_train,Y_train).predict(X_test)
 
-# print("----- SVM Classification(No GridSearch)-----")
-# print("{} Folds Mean Accuracy: {}".format(K, kfp.accuracy()))
-# print("{} Folds Mean Recall: {}".format(K, kfp.recall()))
-# print("{} Folds Mean Precision: {}".format(K, kfp.precision()))
-# print("{} Folds Mean F1-Score: {}".format(K, kfp.f_score()))
+
+
+K = 10
+kfp = KFoldClassificationPerformance(x_ary= X, y_ary=Y, classifier= classifier.classifier, k_fold=  K)
+
+print("----- SVM Classification(No GridSearch)-----")
+print("{} Folds Mean Accuracy: {}".format(K, kfp.accuracy()))
+print("{} Folds Mean Recall: {}".format(K, kfp.recall()))
+print("{} Folds Mean Precision: {}".format(K, kfp.precision()))
+print("{} Folds Mean F1-Score: {}".format(K, kfp.f_score()))
 
 
 
