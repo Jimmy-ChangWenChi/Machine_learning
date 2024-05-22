@@ -16,9 +16,10 @@ X= pp.missing_data(X,strategy="median")
 
 X = pp.feature_scaling(fit_ary=X,transform_arys=X)
 
+#PCA
 from HappyML.preprocessor import PCASelector
-selector = PCASelector()
-x = selector.fit(x_ary= X, verbose = True,plot = True).transform(X)
+selector = PCASelector(best_k=2)
+X = selector.fit(x_ary= X, verbose = True,plot = True).transform(X)
 
 
 #K-means
