@@ -79,6 +79,9 @@ closePriceMean_60Day = closePrice_60Day.mean()
 
 
 #繪圖
+
+plt.rcParams['font.sans-serif'] = ['Arial Unicode MS'] 
+plt.rcParams['axes.unicode_minus'] = False
 title = stockName + ' ' + startDate.strftime("%Y-%m-%d") + " ~ " + EndDate.strftime("%Y-%m-%d") + " 收盤價"
 plt.title(title)
 plt.xlabel("Date") # Y軸
