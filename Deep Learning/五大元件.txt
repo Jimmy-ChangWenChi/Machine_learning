@@ -1,0 +1,38 @@
+神經網路五大元件:激活函數
+
+    輸出層: linear (回歸),  sigmoid(二選一), softmax(多選一)
+    隱藏層的激活函數都用: ReLU(線性整流函數)
+
+神經網路五大元件:權重初始器
+    常數型, 一般分佈型, Glorot 分佈型
+
+    常數型初始 函數為 0, 1, k
+    一般分佈型 函數為 
+                    Random_uniform(平均分佈) min:-0.05 max: 0.05, 
+                    Random_normal(常態分佈), 
+                    Truncated_Normal(同random_normal 但 95%以外的拋棄)
+    Glorot分佈型 函數為
+                    Glorot_uniform x = sqrt(6/(fan_in+fan_out))
+                    Glorot_normal x = sqrt(2/(fan_in+fan_out)) (95%以外的拋棄)
+                    
+    Glorot 缺點:跟 Relu 適應不良
+
+    何氏分佈: 改善Glorot在ReLu梯度消失的問題
+                    variance_scaling(He Normal) x = sqrt(2*2/(fan_in+fan_out))
+    
+    淺層學習(隱藏層2層) => Random_normal or Truncated_Normal
+    深度學習(隱藏層5~6層) => Glorot_normal
+    深度學習+Relu(隱藏層10層以上) => variance_scaling(scale = 2)
+
+
+神經網路五大元件:損失函數
+    均方誤差(MSE):  回歸問題 使用
+    二元交叉熵:     二元分類問題 使用
+    類別交叉熵:     多元分類問題 使用
+
+    交叉熵: 實際機率分佈 VS 預測機率分佈 的落差程度
+
+神經網路五大元件:評估標準
+
+
+神經網路五大元件:優化器
